@@ -23,7 +23,7 @@
     <input matInput placeholder="Prompt" #prompt>
   </mat-form-field>
 
-  <button mat-raised-button (click)="runPrompt(prompt.value, langModel.value)" [disabled]="!llmService.isReady()">
+  <button mat-raised-button (click)="runPrompt(prompt.value, langModel.value)">
     <mat-icon>send</mat-icon>
     Ask
   </button>
