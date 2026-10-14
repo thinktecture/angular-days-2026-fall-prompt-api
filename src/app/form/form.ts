@@ -22,10 +22,18 @@ export class Form {
     const languageModel = await LanguageModel.create({
       initialPrompts: [{
         role: 'system',
-        content: `Extract the information to a JSON object of this shape: ${JSON.stringify(this.model())}`,
+        content: "Extract the information into the different properties of the JSON object. It is a person's name, and the city must exist (e.g., Tirol is not a city).",
       }],
     });
-    const result = await languageModel.prompt(value);
+    const result = await languageModel.prompt(value, {
+      responseConstraint: {
+        type: 'object',
+        properties: {
+          name: { type: 'string' },
+          city: { type: 'string' },
+        },
+      },
+    });
     console.log(result);
   }
 
